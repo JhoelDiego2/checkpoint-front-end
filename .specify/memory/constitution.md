@@ -1,50 +1,45 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Constituição do Projeto — Catálogo de Jogos
 
-## Core Principles
+## Princípios Centrais
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### 1. Propósito e Originalidade
+O projeto deve entregar um catálogo simples de jogos, inspirado no site Letterboxd, sem copiar marca, identidade visual, textos, ícones ou elementos proprietários de terceiros.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### 2. Escopo Enxuto e Viável
+O MVP deve permanecer pequeno e viável para contexto acadêmico em grupo. Escopo inicial permitido:
+- cadastro e listagem de jogos;
+- visualização de detalhes essenciais;
+- registro de status pessoal (ex.: “quero jogar”, “jogando”, “jogado”);
+- busca e filtro básicos.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+Fica fora do escopo inicial: recomendações avançadas, funcionalidades sociais complexas, gamificação e integrações não essenciais.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### 3. Base Técnica Obrigatória
+O front-end deve ser desenvolvido com React + Vite, mantendo obrigatoriamente a estrutura:
+- `src/api`
+- `src/components`
+- `src/pages`
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### 4. Acessibilidade e Comunicação Clara
+Todas as entregas devem priorizar:
+- acessibilidade básica (semântica HTML, navegação por teclado, contraste e rótulos);
+- mensagens claras para estados de carregamento, sucesso, vazio e erro;
+- tratamento consistente de erros de validação, requisição e falhas inesperadas.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### 5. Colaboração e Revisão em Grupo
+Artefatos de produto e desenvolvimento devem passar por revisão do grupo. Decisões de escopo e mudanças relevantes devem ser registradas de forma objetiva antes da implementação.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+## Restrições e Critérios de Pronto
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Uma entrega só é considerada pronta quando:
+1. respeita o escopo acordado;
+2. segue a estrutura técnica obrigatória;
+3. apresenta mensagens e tratamento de erro adequados;
+4. atende critérios básicos de acessibilidade;
+5. foi revisada e aprovada pelo grupo.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Governança
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+Esta constituição orienta as decisões do projeto e tem precedência sobre preferências individuais. Qualquer ampliação de escopo exige consenso do grupo e atualização deste documento.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Versão**: 2.0.0 | **Ratificada em**: 2026-11-15 | **Última alteração**: 2026-11-15

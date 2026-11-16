@@ -83,22 +83,25 @@ Como pessoa usuária, quero visualizar minha lista pessoal e alterar o status do
 - **FR-009**: No MVP, o sistema MUST persistir a lista pessoal no armazenamento local do navegador.
 - **FR-010**: No MVP, sem login, a lista pessoal MUST ficar disponível somente no mesmo navegador/dispositivo em que foi salva.
 - **FR-011**: O sistema MUST exibir mensagem clara de falha quando a fonte externa de catálogo não puder ser consultada.
-- **FR-012**: O sistema MUST oferecer ação de nova tentativa após falha na consulta à fonte externa.
+- **FR-012**: O sistema MUST oferecer ação de nova tentativa para falhas recuperáveis de consulta (ex.: rede indisponível, timeout, erro de servidor).
 - **FR-013**: O sistema MUST exibir estado de "nenhum jogo encontrado" quando uma busca não retornar resultados.
 - **FR-014**: O sistema MUST manter fora de escopo login, recursos sociais, avaliações e recomendações avançadas nesta versão.
+- **FR-015**: O sistema MUST exibir atribuição à RAWG com hyperlink ativo nas páginas em que dados do catálogo RAWG forem exibidos.
+- **FR-016**: Quando a consulta falhar por credencial inválida (`401`), o sistema MUST exibir mensagem de erro indicando necessidade de corrigir a configuração da chave, sem tratar esse caso como falha recuperável por nova tentativa do usuário final.
+- **FR-017**: O sistema MUST usar mapeamento explícito de status com rótulos de interface {"quero jogar", "jogando", "jogado"} e valores canônicos internos/armazenados {"quero-jogar", "jogando", "jogado"}.
 
 ### Key Entities *(include if feature involves data)*
 
 - **Jogo do Catálogo**: item consultado na fonte externa, identificado de forma única e com informações disponíveis (ex.: título e demais dados retornados).
 - **Item da Lista Pessoal**: vínculo entre uma pessoa usuária e um jogo do catálogo, contendo status atual e referência única ao jogo.
-- **Status de Jogo**: conjunto fechado de estados permitidos para um item da lista: "quero jogar", "jogando" e "jogado".
+- **Status de Jogo**: conjunto fechado de estados permitidos com mapeamento explícito entre rótulo e valor canônico: "quero jogar" → `quero-jogar`, "jogando" → `jogando`, "jogado" → `jogado`.
 
 ## Success Criteria *(mandatory)*
 
 ### Measurable Outcomes
 
 - **SC-001**: Em teste de validação, 100% das tentativas de adicionar jogo duplicado são bloqueadas com mensagem clara ao usuário.
-- **SC-002**: Em teste de cenário com falha da fonte externa, 100% dos fluxos exibem mensagem de erro compreensível e opção de nova tentativa.
+- **SC-002**: Em teste de cenário com falha da fonte externa, 100% dos fluxos de erro recuperável (rede, timeout e erro de servidor) exibem mensagem compreensível e opção de nova tentativa; e 100% dos fluxos com erro `401` por chave inválida exibem orientação para correção da configuração da credencial, sem exigir retry.
 - **SC-003**: Em teste de busca sem correspondência, 100% das execuções exibem estado de "nenhum jogo encontrado" sem interromper o uso da aplicação.
 - **SC-004**: Em teste de retorno ao site, 100% dos itens previamente adicionados permanecem disponíveis com seus status salvos.
 - **SC-005**: Pelo menos 90% das pessoas avaliadoras do grupo conseguem pesquisar um jogo, adicioná-lo com status e atualizar esse status sem ajuda externa.

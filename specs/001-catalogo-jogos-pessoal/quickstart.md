@@ -70,6 +70,55 @@ Este guia valida o comportamento fim a fim do MVP após implementação.
 - mensagem clara de erro;
 - ação de “tentar novamente”.
 
+## Cenário 8 — Chave inválida (401)
+
+1. Simular requisição com chave RAWG inválida.
+
+**Resultado esperado**:
+- mensagem clara indicando erro de configuração da credencial/chave;
+- não tratar como erro recuperável por nova tentativa do usuário final;
+- registrar orientação de correção de configuração.
+
+## Cenário 9 — Validação do mapeamento de status (rótulo x valor)
+
+1. Adicionar jogo com cada opção de status exibida na interface.
+2. Confirmar que os rótulos visíveis são: `quero jogar`, `jogando`, `jogado`.
+3. Confirmar que os valores persistidos seguem a forma canônica: `quero-jogar`, `jogando`, `jogado`.
+
+**Resultado esperado**:
+- mapeamento consistente entre interface e armazenamento;
+- sem valores fora do conjunto canônico.
+
+## Avaliação do SC-005 (roteiro e registro)
+
+### Objetivo
+
+Validar se “pelo menos 90% das pessoas avaliadoras do grupo conseguem pesquisar um jogo, adicioná-lo com status e atualizar esse status sem ajuda externa”.
+
+### Decisão pendente do grupo
+
+- Definir **quantidade de avaliadores** e registrar antes da execução.
+
+### Roteiro de avaliação (por avaliador)
+
+1. Pesquisar um jogo.
+2. Abrir detalhe do jogo.
+3. Adicionar o jogo à lista com um status inicial.
+4. Acessar “Minha Lista”.
+5. Alterar o status do jogo.
+
+### Forma de registro
+
+- Registrar em tabela no próprio documento:
+  - Identificador do avaliador
+  - Concluiu fluxo sem ajuda externa? (Sim/Não)
+  - Observações breves (opcional)
+- Calcular taxa de sucesso: `(total de Sim / total de avaliadores) x 100`.
+
+### Critério de aprovação
+
+- Aprovar SC-005 se a taxa calculada for `>= 90%`.
+
 ## Fora de escopo (deve continuar ausente)
 
 - Login/autenticação

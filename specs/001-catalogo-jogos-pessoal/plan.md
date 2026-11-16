@@ -35,6 +35,8 @@ A lista pessoal será persistida em `localStorage` (sem login), portanto ficará
 - Evitar exposição de segredos no front-end
 - Incluir paginação na listagem de jogos
 - Tratar explicitamente estados de carregamento, erro, sem resultados e duplicidade
+- Diferenciar erro recuperável (rede/servidor/timeout com retry) de erro `401` por chave inválida (mensagem de configuração)
+- Manter mapeamento explícito de status: rótulos UI (`quero jogar`, `jogando`, `jogado`) e valores canônicos (`quero-jogar`, `jogando`, `jogado`)
 
 **Risco de integração externa (RAWG + front-end direto)**:
 - A RAWG exige `key` na query string.

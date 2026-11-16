@@ -82,7 +82,16 @@
 
 ## Erros e comportamento esperado
 
-- `401`: chave ausente/inválida → exibir mensagem clara de falha de integração e opção “tentar novamente”.
+- `401`: chave ausente/inválida → exibir mensagem clara de erro de configuração de credencial (ação esperada: corrigir configuração/chave). Não tratar como falha recuperável por retry do usuário final.
 - `404`: recurso não encontrado → exibir mensagem amigável de não encontrado.
-- Falha de rede/5xx → exibir erro genérico e ação de retry.
+- Falha de rede/5xx/timeout → exibir erro genérico e ação de retry.
 - Busca sem itens em `results` → mostrar estado “nenhum jogo encontrado”.
+
+## Convenção de status da lista pessoal
+
+- **Rótulos de interface (PT-BR)**: `"quero jogar"`, `"jogando"`, `"jogado"`
+- **Valores canônicos internos/armazenados**: `"quero-jogar"`, `"jogando"`, `"jogado"`
+- **Mapeamento explícito**:
+  - `"quero jogar"` → `"quero-jogar"`
+  - `"jogando"` → `"jogando"`
+  - `"jogado"` → `"jogado"`

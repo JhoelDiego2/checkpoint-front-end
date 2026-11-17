@@ -22,17 +22,21 @@
 - **Rationale**: aderência ao MVP aprovado; sem ampliar escopo.
 - **Fora do escopo nesta versão**: trailers, lojas, avaliações e recomendações avançadas.
 
-## Decision 3: Segurança da chave no front-end
+## Decision 3: Segurança da chave no front-end (Opção B — decisão aprovada pelo grupo em T000)
 
-- **Decision**: usar integração direta com a RAWG no navegador para o MVP (Opção A), configurando a chave localmente em `.env` como `VITE_RAWG_API_KEY`.
+- **Decision**: acessar a RAWG exclusivamente por backend/proxy (Opção B), de modo que a API key nunca seja enviada ao navegador.
 - **Rationale (confirmado)**:
   - RAWG exige API key (`key`) nas requisições.
   - Em Vite, variáveis `VITE_*` são expostas no bundle/browser e **não são secretas**.
-  - O grupo aceita o risco de exposição e possível uso da quota da chave no contexto do MVP acadêmico.
+  - Logo, a chave no front-end pode ser copiada e abusada por terceiros: a API key **nunca** deve ir ao navegador nem ser configurada em variáveis `VITE_*`.
+  - Com a Opção B, a credencial permanece em configuração local do servidor/proxy e o cliente consome a API por intermédio desse backend, sem receber a chave.
 - **Política de projeto**:
-  - Usar `.env` local e não versionar credenciais reais.
-  - A variável `VITE_RAWG_API_KEY` não deve ser tratada como segredo; ela pode ser extraída do cliente.
-  - Backend/proxy não faz parte do escopo escolhido para este MVP.
+  - Não recomendar commit de credenciais reais no repositório.
+  - A chave RAWG fica em configuração local do servidor (fora do versionamento); não usar prefixo `VITE_` para a chave.
+- **Histórico factual das alternativas consideradas (registrado antes da decisão)**:
+  - **A)** integração direta no cliente para MVP acadêmico, aceitando risco de exposição e quota.
+  - **B)** backend/proxy para proteger a chave (mais seguro, mas adiciona escopo arquitetural).
+  - **Decisão do grupo (T000)**: Opção B aprovada; a Opção A foi descartada por expor a chave no navegador.
 
 ## Confirmado em documentação/testes
 

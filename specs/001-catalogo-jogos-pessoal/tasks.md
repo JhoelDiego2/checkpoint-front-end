@@ -27,7 +27,7 @@
 
 - [x] T001 Criar pastas base `src/api`, `src/components` e `src/pages` conforme constituição em `src/` — Responsável: Kheyla Thais Quispe Puacara
 - [x] T002 Criar arquivo de configuração de ambiente em `/.env.example` sem fixar estratégia antes de T000; se T000 = Opção A (cliente direto), incluir `VITE_RAWG_API_KEY=` com observação de não commitar credenciais reais — Responsável: Kheyla Thais Quispe Puacara
-- [ ] T003 [P] Criar mapeamento explícito de status em `src/components/statusOptions.js` com rótulos de interface (`quero jogar`, `jogando`, `jogado`) e valores canônicos armazenados (`quero-jogar`, `jogando`, `jogado`) — Responsável: Renan Daher Franceschelli
+- [x] T003 [P] Criar mapeamento explícito de status em `src/components/statusOptions.js` com rótulos de interface (`quero jogar`, `jogando`, `jogado`) e valores canônicos armazenados (`quero-jogar`, `jogando`, `jogado`) — Responsável: Renan Daher Franceschelli
 - [ ] T004 [P] Criar utilitário de mensagens em português para estados de loading/erro/vazio/sucesso em `src/components/uiMessages.js` — Responsável: Renan Daher Franceschelli
 
 ---

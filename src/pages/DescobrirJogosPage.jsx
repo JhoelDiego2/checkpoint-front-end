@@ -8,25 +8,30 @@ import SearchBar from '../components/SearchBar'
 import { UI_MESSAGES } from '../components/uiMessages'
 import '../components/catalog.css'
 
-async function requestCatalogGames(search, signal) {
+async function requestCatalogGames(search, page, signal) {
   const client = createDirectRawgCatalogClient()
   const response = await client.listGames({
     search,
-    page: 1,
+    page,
     page_size: 20,
     signal,
   })
 
-  return mapRawgListToCatalogResponse(response).results
+  return mapRawgListToCatalogResponse(response)
 }
 
 export default function DescobrirJogosPage() {
   const [games, setGames] = useState([])
+  const [count, setCount] = useState(0)
+  const [page, setPage] = useState(1)
+  const [hasNext, setHasNext] = useState(false)
+  const [hasPrevious, setHasPrevious] = useState(false)
+  const [currentSearch, setCurrentSearch] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
   const activeRequest = useRef(null)
 
-  async function searchGames(search = '') {
+  async function fetchCatalog(search, targetPage) {
     activeRequest.current?.abort()
 
     const controller = new AbortController()
@@ -35,10 +40,14 @@ export default function DescobrirJogosPage() {
     setError(null)
 
     try {
-      const results = await requestCatalogGames(search, controller.signal)
+      const catalogData = await requestCatalogGames(search, targetPage, controller.signal)
 
       if (activeRequest.current === controller) {
-        setGames(results)
+        setGames(catalogData.results)
+        setCount(catalogData.count)
+        setPage(targetPage)
+        setHasNext(Boolean(catalogData.next))
+        setHasPrevious(Boolean(catalogData.previous))
       }
     } catch (requestError) {
       if (activeRequest.current === controller && requestError?.name !== 'AbortError') {
@@ -52,34 +61,29 @@ export default function DescobrirJogosPage() {
     }
   }
 
-  useEffect(() => {
-    const controller = new AbortController()
-    let isActive = true
-    activeRequest.current = controller
+  function handleSearch(search = '') {
+    setCurrentSearch(search)
+    fetchCatalog(search, 1)
+  }
 
-    async function loadInitialCatalog() {
-      try {
-        const results = await requestCatalogGames('', controller.signal)
-
-        if (isActive) {
-          setGames(results)
-        }
-      } catch (requestError) {
-        if (isActive && requestError?.name !== 'AbortError') {
-          setError(requestError)
-        }
-      } finally {
-        if (isActive) {
-          activeRequest.current = null
-          setIsLoading(false)
-        }
-      }
+  function handleNextPage() {
+    if (hasNext && !isLoading) {
+      fetchCatalog(currentSearch, page + 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
+  }
 
-    loadInitialCatalog()
+  function handlePreviousPage() {
+    if (hasPrevious && !isLoading && page > 1) {
+      fetchCatalog(currentSearch, page - 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
+  useEffect(() => {
+    fetchCatalog('', 1)
 
     return () => {
-      isActive = false
       activeRequest.current?.abort()
       activeRequest.current = null
     }
@@ -92,18 +96,44 @@ export default function DescobrirJogosPage() {
         <p>Pesquise jogos e conheça o catálogo disponível.</p>
       </header>
 
-      <SearchBar onSearch={searchGames} isLoading={isLoading} />
+      <SearchBar onSearch={handleSearch} isLoading={isLoading} />
 
       {isLoading && <LoadingState message={UI_MESSAGES.loading.catalog} />}
       {!isLoading && error && <ErrorState />}
       {!isLoading && !error && games.length > 0 && (
-        <ul className="catalog-game-grid" aria-label="Jogos encontrados">
-          {games.map((game) => (
-            <li key={game.id}>
-              <GameCard game={game} />
-            </li>
-          ))}
-        </ul>
+        <>
+          <div className="catalog-pagination-info" style={{ marginBottom: '1rem', color: 'var(--text)' }}>
+            Exibindo página {page} de {Math.max(1, Math.ceil(count / 20))} ({count} jogos encontrados)
+          </div>
+
+          <ul className="catalog-game-grid" aria-label="Jogos encontrados">
+            {games.map((game) => (
+              <li key={game.id}>
+                <GameCard game={game} />
+              </li>
+            ))}
+          </ul>
+
+          <nav className="catalog-pagination" aria-label="Paginação do catálogo" style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '2rem' }}>
+            <button
+              type="button"
+              onClick={handlePreviousPage}
+              disabled={!hasPrevious || isLoading}
+              className="catalog-search__submit"
+            >
+              Anterior
+            </button>
+            <span>Página {page}</span>
+            <button
+              type="button"
+              onClick={handleNextPage}
+              disabled={!hasNext || isLoading}
+              className="catalog-search__submit"
+            >
+              Próxima
+            </button>
+          </nav>
+        </>
       )}
     </main>
   )

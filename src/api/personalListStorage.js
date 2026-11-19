@@ -269,6 +269,7 @@ export function createPersonalListStorage({
     const updatedItem = {
       ...items[index],
       status,
+      updatedAt: getNowIso(now),
     }
 
     const nextItems = items.slice()

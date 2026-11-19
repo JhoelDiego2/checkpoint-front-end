@@ -99,7 +99,7 @@
 - [ ] T034 [US3] Implementar estado de lista vazia em `src/pages/MinhaListaPage.jsx` — Responsável: Catarina Gimenes Pires
 - [ ] T032 [US3] Implementar alteração de status na lista usando valores canônicos permitidos (`quero-jogar`, `jogando`, `jogado`) e exibindo rótulos legíveis na interface em `src/pages/MinhaListaPage.jsx` — Responsável: Kheyla Thais Quispe Puacara
 - [ ] T033 [US3] Integrar `StatusSelector` e `GameStatusBadge` na lista em `src/pages/MinhaListaPage.jsx` — Responsável: Kheyla Thais Quispe Puacara
-- [ ] T021 [US3] Garantir atualização de `updatedAt (string datetime ISO, obrigatório)` ao trocar status em `src/api/personalListStorage.js` — Responsável: Lukas Farias de Oliveira
+- [x] T021 [US3] Garantir atualização de `updatedAt (string datetime ISO, obrigatório)` ao trocar status em `src/api/personalListStorage.js` — Responsável: Lukas Farias de Oliveira
 - [ ] T035 [US3] Exibir mensagem informativa sobre persistência local, ausência de sincronização entre dispositivos e risco de perda ao limpar dados em `src/pages/MinhaListaPage.jsx` — Responsável: Catarina Gimenes Pires
 
 **Checkpoint**: US3 funcional e validável de forma independente.

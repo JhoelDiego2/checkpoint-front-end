@@ -152,6 +152,10 @@ export default function DescobrirJogosPage() {
           </nav>
         </>
       )}
+
+      <footer className="catalog-footer" style={{ marginTop: '3rem', fontSize: '0.9rem', color: 'var(--text)' }}>
+        Dados fornecidos por <a href="https://rawg.io" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>RAWG Video Games Database</a>.
+      </footer>
     </main>
   )
 }

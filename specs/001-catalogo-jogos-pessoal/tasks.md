@@ -66,7 +66,7 @@
 - [x] T014 [US1] Tratar erros recuperáveis (rede/servidor `5xx`/timeout com retry) e erro de chave inválida (`401` sem retry) na descoberta em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
 - [ ] T025 [US1] Tratar erros recuperáveis (rede/servidor `5xx`/timeout com retry) e erro de chave inválida (`401` sem retry) nos detalhes em `src/pages/DetalheJogoPage.jsx` — Responsável: Rafael Fratini Dal Corso
 - [x] T015 [US1] Implementar estado "nenhum jogo encontrado" quando `results` vier vazio em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
-- [ ] T016 [US1] Exibir atribuição obrigatória à RAWG com hyperlink ativo no catálogo em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
+- [x] T016 [US1] Exibir atribuição obrigatória à RAWG com hyperlink ativo no catálogo em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
 - [ ] T026 [US1] Exibir atribuição obrigatória à RAWG com hyperlink ativo nos detalhes em `src/pages/DetalheJogoPage.jsx` — Responsável: Rafael Fratini Dal Corso
 
 **Checkpoint**: US1 funcional e validável de forma independente.

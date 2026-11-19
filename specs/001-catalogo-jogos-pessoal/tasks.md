@@ -79,7 +79,7 @@
 
 **Independent Test**: A partir do detalhe, adicionar jogo com status e validar bloqueio ao repetir a adição.
 
-- [ ] T017 [US2] Implementar `StatusSelector` com rótulos legíveis (`quero jogar`, `jogando`, `jogado`) e emissão dos valores canônicos (`quero-jogar`, `jogando`, `jogado`) em `src/components/StatusSelector.jsx` — Responsável: Renan Daher Franceschelli
+- [x] T017 [US2] Implementar `StatusSelector` com rótulos legíveis (`quero jogar`, `jogando`, `jogado`) e emissão dos valores canônicos (`quero-jogar`, `jogando`, `jogado`) em `src/components/StatusSelector.jsx` — Responsável: Renan Daher Franceschelli
 - [ ] T023 [US2] Implementar `GameStatusBadge` para exibir status atual em `src/components/GameStatusBadge.jsx` — Responsável: Rafael Fratini Dal Corso
 - [ ] T028 [US2] Integrar ação "Adicionar à lista" no detalhe usando `personalListStorage` em `src/pages/DetalheJogoPage.jsx` — Responsável: Kheyla Thais Quispe Puacara
 - [ ] T029 [US2] Implementar feedback de sucesso ao adicionar em `src/pages/DetalheJogoPage.jsx` — Responsável: Kheyla Thais Quispe Puacara

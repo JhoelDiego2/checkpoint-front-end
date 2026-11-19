@@ -63,7 +63,7 @@
 - [x] T012 [US1] Implementar página de descoberta com consulta RAWG, renderização dos resultados, estado de carregamento e mensagem genérica para falhas (sem retry, diferenciação de erros, paginação ou estado vazio nesta tarefa) em `src/pages/DescobrirJogosPage.jsx` — Responsável: Jhoel Diego Mamani Mita
 - [x] T013 [US1] Implementar controles e navegação de paginação (`page`, `count`, `next`, `previous`) em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
 - [ ] T024 [US1] Implementar página de detalhe com dados disponíveis do jogo e fallback para campos ausentes em `src/pages/DetalheJogoPage.jsx` — Responsável: Rafael Fratini Dal Corso
-- [ ] T014 [US1] Tratar erros recuperáveis (rede/servidor `5xx`/timeout com retry) e erro de chave inválida (`401` sem retry) na descoberta em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
+- [x] T014 [US1] Tratar erros recuperáveis (rede/servidor `5xx`/timeout com retry) e erro de chave inválida (`401` sem retry) na descoberta em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
 - [ ] T025 [US1] Tratar erros recuperáveis (rede/servidor `5xx`/timeout com retry) e erro de chave inválida (`401` sem retry) nos detalhes em `src/pages/DetalheJogoPage.jsx` — Responsável: Rafael Fratini Dal Corso
 - [ ] T015 [US1] Implementar estado "nenhum jogo encontrado" quando `results` vier vazio em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
 - [ ] T016 [US1] Exibir atribuição obrigatória à RAWG com hyperlink ativo no catálogo em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli

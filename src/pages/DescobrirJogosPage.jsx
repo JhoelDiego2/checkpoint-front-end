@@ -5,7 +5,7 @@ import ErrorState from '../components/ErrorState'
 import GameCard from '../components/GameCard'
 import LoadingState from '../components/LoadingState'
 import SearchBar from '../components/SearchBar'
-import { UI_MESSAGES } from '../components/uiMessages'
+import { UI_MESSAGES, getErrorMessage } from '../components/uiMessages'
 import '../components/catalog.css'
 
 async function requestCatalogGames(search, page, signal) {
@@ -89,6 +89,13 @@ export default function DescobrirJogosPage() {
     }
   }, [])
 
+  const isApiKeyError = error?.status === 401 || error?.status === '401'
+  const errorMessage = isApiKeyError
+    ? getErrorMessage(401)
+    : error?.status >= 500 || error?.status === 'network' || !error?.status
+    ? getErrorMessage('network')
+    : getErrorMessage(error?.status)
+
   return (
     <main className="catalog-page">
       <header className="catalog-page__header">
@@ -99,7 +106,13 @@ export default function DescobrirJogosPage() {
       <SearchBar onSearch={handleSearch} isLoading={isLoading} />
 
       {isLoading && <LoadingState message={UI_MESSAGES.loading.catalog} />}
-      {!isLoading && error && <ErrorState />}
+      {!isLoading && error && (
+        <ErrorState
+          message={errorMessage}
+          onRetry={isApiKeyError ? undefined : () => fetchCatalog(currentSearch, page)}
+          retryLabel="Tentar novamente"
+        />
+      )}
       {!isLoading && !error && games.length > 0 && (
         <>
           <div className="catalog-pagination-info" style={{ marginBottom: '1rem', color: 'var(--text)' }}>

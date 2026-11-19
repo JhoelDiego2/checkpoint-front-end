@@ -46,7 +46,7 @@
 - [x] T020 Implementar validações de domínio em `src/api/personalListStorage.js` com regras verbatim: `Não permitir dois itens com o mesmo gameId`, `Alteração de status aceita apenas valores do enum`, `Em tentativa de duplicidade, lista não é alterada e deve haver mensagem clara`, `Transição inválida (valor fora do enum) deve ser rejeitada sem perda do estado anterior` — Responsável: Lukas Farias de Oliveira
 - [x] T009 Criar componentes reutilizáveis de estado `LoadingState`, `ErrorState` e `EmptyState` em `src/components/LoadingState.jsx`, `src/components/ErrorState.jsx` e `src/components/EmptyState.jsx` — Responsável: Jhoel Diego Mamani Mita
 - [ ] T027 Criar roteamento base e navegação entre páginas em `src/App.jsx` e `src/main.jsx` — Responsável: Kheyla Thais Quispe Puacara
-- [ ] T022 Criar nota de conformidade RAWG (atribuição + risco de exposição de `VITE_*`) em `specs/001-catalogo-jogos-pessoal/contracts/catalog-api-contract.md` — Responsável: Rafael Fratini Dal Corso
+- [x] T022 Criar nota de conformidade RAWG (atribuição + risco de exposição de `VITE_*`) em `specs/001-catalogo-jogos-pessoal/contracts/catalog-api-contract.md` — Responsável: Rafael Fratini Dal Corso
 
 **Checkpoint**: Fundação pronta para desenvolver stories independentemente.
 
@@ -62,12 +62,12 @@
 - [x] T011 [US1] Implementar `GameCard` com dados mínimos (`title`, `thumbnail`, `platform`, `releaseDate`) em `src/components/GameCard.jsx` — Responsável: Jhoel Diego Mamani Mita
 - [x] T012 [US1] Implementar página de descoberta com consulta RAWG, renderização dos resultados, estado de carregamento e mensagem genérica para falhas (sem retry, diferenciação de erros, paginação ou estado vazio nesta tarefa) em `src/pages/DescobrirJogosPage.jsx` — Responsável: Jhoel Diego Mamani Mita
 - [x] T013 [US1] Implementar controles e navegação de paginação (`page`, `count`, `next`, `previous`) em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
-- [ ] T024 [US1] Implementar página de detalhe com dados disponíveis do jogo e fallback para campos ausentes em `src/pages/DetalheJogoPage.jsx` — Responsável: Rafael Fratini Dal Corso
+- [x] T024 [US1] Implementar página de detalhe com dados disponíveis do jogo e fallback para campos ausentes em `src/pages/DetalheJogoPage.jsx` — Responsável: Rafael Fratini Dal Corso
 - [x] T014 [US1] Tratar erros recuperáveis (rede/servidor `5xx`/timeout com retry) e erro de chave inválida (`401` sem retry) na descoberta em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
-- [ ] T025 [US1] Tratar erros recuperáveis (rede/servidor `5xx`/timeout com retry) e erro de chave inválida (`401` sem retry) nos detalhes em `src/pages/DetalheJogoPage.jsx` — Responsável: Rafael Fratini Dal Corso
+- [x] T025 [US1] Tratar erros recuperáveis (rede/servidor `5xx`/timeout com retry) e erro de chave inválida (`401` sem retry) nos detalhes em `src/pages/DetalheJogoPage.jsx` — Responsável: Rafael Fratini Dal Corso
 - [x] T015 [US1] Implementar estado "nenhum jogo encontrado" quando `results` vier vazio em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
 - [x] T016 [US1] Exibir atribuição obrigatória à RAWG com hyperlink ativo no catálogo em `src/pages/DescobrirJogosPage.jsx` — Responsável: Renan Daher Franceschelli
-- [ ] T026 [US1] Exibir atribuição obrigatória à RAWG com hyperlink ativo nos detalhes em `src/pages/DetalheJogoPage.jsx` — Responsável: Rafael Fratini Dal Corso
+- [x] T026 [US1] Exibir atribuição obrigatória à RAWG com hyperlink ativo nos detalhes em `src/pages/DetalheJogoPage.jsx` — Responsável: Rafael Fratini Dal Corso
 
 **Checkpoint**: US1 funcional e validável de forma independente.
 
@@ -80,7 +80,7 @@
 **Independent Test**: A partir do detalhe, adicionar jogo com status e validar bloqueio ao repetir a adição.
 
 - [x] T017 [US2] Implementar `StatusSelector` com rótulos legíveis (`quero jogar`, `jogando`, `jogado`) e emissão dos valores canônicos (`quero-jogar`, `jogando`, `jogado`) em `src/components/StatusSelector.jsx` — Responsável: Renan Daher Franceschelli
-- [ ] T023 [US2] Implementar `GameStatusBadge` para exibir status atual em `src/components/GameStatusBadge.jsx` — Responsável: Rafael Fratini Dal Corso
+- [x] T023 [US2] Implementar `GameStatusBadge` para exibir status atual em `src/components/GameStatusBadge.jsx` — Responsável: Rafael Fratini Dal Corso
 - [ ] T028 [US2] Integrar ação "Adicionar à lista" no detalhe usando `personalListStorage` em `src/pages/DetalheJogoPage.jsx` — Responsável: Kheyla Thais Quispe Puacara
 - [ ] T029 [US2] Implementar feedback de sucesso ao adicionar em `src/pages/DetalheJogoPage.jsx` — Responsável: Kheyla Thais Quispe Puacara
 - [ ] T030 [US2] Implementar prevenção de duplicidade e mensagem "jogo já está na lista" em `src/pages/DetalheJogoPage.jsx` — Responsável: Kheyla Thais Quispe Puacara

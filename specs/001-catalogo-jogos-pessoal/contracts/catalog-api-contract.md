@@ -96,3 +96,37 @@
   - `"quero jogar"` → `"quero-jogar"`
   - `"jogando"` → `"jogando"`
   - `"jogado"` → `"jogado"`
+
+## Nota de conformidade RAWG (T022)
+
+Esta nota consolida as obrigações de conformidade assumidas ao consumir a RAWG Video Games Database API neste MVP. Ela complementa as decisões registradas em `research.md`, `plan.md` e na decisão T000.
+
+### 1. Atribuição obrigatória com hyperlink ativo
+
+- A documentação oficial (`https://rawg.io/apidocs`) exige atribuição com **hyperlink ativo** em toda página que exibe dados da API.
+- No MVP, a atribuição deve aparecer nas duas páginas que consomem o catálogo:
+  - descoberta (`src/pages/DescobrirJogosPage.jsx`, T016);
+  - detalhe (`src/pages/DetalheJogoPage.jsx`, T026).
+- Texto adotado: `Dados fornecidos por RAWG Video Games Database.` com link ativo para `https://rawg.io`, usando `target="_blank"` e `rel="noopener noreferrer"`.
+- A atribuição não deve ser removida nem convertida em texto sem link.
+
+### 2. Risco de exposição da chave (`VITE_*`)
+
+- O Vite incorpora ao bundle do navegador **toda** variável de ambiente com o prefixo `VITE_*`.
+- Assim, `VITE_RAWG_API_KEY` **não é um segredo**: fica visível no cliente e pode ser extraída por qualquer visitante da aplicação.
+- O grupo escolheu a Opção A (integração direta no navegador, registrada em T000) e aceita explicitamente:
+  - a exposição da chave no bundle;
+  - o risco de uso indevido da quota da conta RAWG.
+- Regras de projeto decorrentes dessa decisão:
+  - configurar a chave apenas em `.env` local, usando `.env.example` como modelo;
+  - **nunca** versionar a chave real (`.env*` já está listado em `.gitignore`);
+  - tratar `401` como erro de configuração de credencial, **sem** ação de retry para a pessoa usuária final;
+  - não incluir proxy/backend neste MVP (Opção B fora do escopo aprovado).
+
+### 3. Verificação rápida de conformidade
+
+- [x] Atribuição com hyperlink ativo na descoberta (T016)
+- [x] Atribuição com hyperlink ativo no detalhe (T026)
+- [x] Chave real não versionada (`.env` ignorado pelo Git)
+- [x] Risco de exposição documentado em `research.md`, `plan.md` e neste contrato
+- [x] Erro `401` tratado como configuração, sem retry, na descoberta e no detalhe

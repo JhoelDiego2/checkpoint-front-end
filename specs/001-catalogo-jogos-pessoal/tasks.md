@@ -110,7 +110,7 @@
 
 **Purpose**: Ajustes finais de acessibilidade, consistência e validação fim a fim.
 
-- [ ] T018 Revisar semântica, foco de teclado e rótulos nos formulários de `SearchBar` e `StatusSelector` — Responsável: Renan Daher Franceschelli
+- [x] T018 Revisar semântica, foco de teclado e rótulos nos formulários de `SearchBar` e `StatusSelector` — Responsável: Renan Daher Franceschelli
 - [ ] T036 Revisar semântica, foco de teclado e rótulos das páginas em `src/pages/` — Responsável: Catarina Gimenes Pires
 - [ ] T037 Padronizar mensagens em português para sucesso/erro/vazio/carregamento em `src/components/uiMessages.js` e uso nas páginas `src/pages/` — Responsável: Catarina Gimenes Pires
 - [ ] T038 Validar conformidade de escopo (sem login, sem social, sem avaliações, sem recomendações) em `src/App.jsx`, `src/pages/` e `specs/001-catalogo-jogos-pessoal/spec.md` — Responsável: Catarina Gimenes Pires

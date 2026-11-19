@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { mapRawgListToCatalogResponse } from '../api/catalogMapper'
 import { createDirectRawgCatalogClient } from '../api/catalogClient'
 import ErrorState from '../components/ErrorState'
+import EmptyState from '../components/EmptyState'
 import GameCard from '../components/GameCard'
 import LoadingState from '../components/LoadingState'
 import SearchBar from '../components/SearchBar'
@@ -112,6 +113,9 @@ export default function DescobrirJogosPage() {
           onRetry={isApiKeyError ? undefined : () => fetchCatalog(currentSearch, page)}
           retryLabel="Tentar novamente"
         />
+      )}
+      {!isLoading && !error && games.length === 0 && (
+        <EmptyState message={currentSearch ? UI_MESSAGES.empty.search : UI_MESSAGES.empty.catalog} />
       )}
       {!isLoading && !error && games.length > 0 && (
         <>

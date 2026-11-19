@@ -82,9 +82,12 @@ export default function DescobrirJogosPage() {
   }
 
   useEffect(() => {
-    fetchCatalog('', 1)
+    const timeoutId = window.setTimeout(() => {
+      fetchCatalog('', 1)
+    }, 0)
 
     return () => {
+      window.clearTimeout(timeoutId)
       activeRequest.current?.abort()
       activeRequest.current = null
     }

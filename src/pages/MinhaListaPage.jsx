@@ -3,7 +3,7 @@ import { listPersonalItems, updatePersonalItemStatus } from '../api/personalList
 import EmptyState from '../components/EmptyState'
 import ErrorState from '../components/ErrorState'
 import GameStatusBadge from '../components/GameStatusBadge'
-import { STATUS_OPTIONS, isValidCanonicalStatus } from '../components/statusOptions'
+import StatusSelector from '../components/StatusSelector'
 import { UI_MESSAGES, getErrorMessage } from '../components/uiMessages'
 import '../components/catalog.css'
 
@@ -15,14 +15,7 @@ export default function MinhaListaPage() {
     setItems(listPersonalItems())
   }
 
-  function handleStatusChange(item, event) {
-    const nextStatus = event.target.value
-
-    if (!isValidCanonicalStatus(nextStatus)) {
-      setFeedback({ type: 'error', message: getErrorMessage('invalid-status') })
-      return
-    }
-
+  function handleStatusChange(item, nextStatus) {
     if (nextStatus === item.status) return
 
     try {
@@ -43,6 +36,10 @@ export default function MinhaListaPage() {
     <main className="catalog-page">
       <header className="catalog-page__header">
         <h1>Minha Lista</h1>
+        <p className="personal-list__storage-warning" role="note">
+          Esta lista fica salva apenas neste navegador. Não há sincronização entre dispositivos;
+          limpar os dados do navegador pode apagar os jogos cadastrados.
+        </p>
       </header>
 
       {feedback?.type === 'success' && (
@@ -82,36 +79,13 @@ export default function MinhaListaPage() {
                   Status atual: <GameStatusBadge status={item.status} />
                 </p>
 
-                <div style={{ display: 'grid', gap: '0.35rem', marginTop: '0.75rem' }}>
-                  <label
-                    htmlFor={`personal-list-status-${item.gameId}`}
-                    style={{ color: 'var(--text-h)', fontSize: '0.95rem', fontWeight: 600 }}
-                  >
-                    Alterar status:
-                  </label>
-                  <select
+                <div style={{ display: 'grid', marginTop: '0.75rem' }}>
+                  <StatusSelector
                     id={`personal-list-status-${item.gameId}`}
-                    value={isValidCanonicalStatus(item.status) ? item.status : STATUS_OPTIONS[0].value}
-                    onChange={(event) => handleStatusChange(item, event)}
-                    style={{
-                      boxSizing: 'border-box',
-                      width: '100%',
-                      minHeight: '2.75rem',
-                      padding: '0.55rem 0.75rem',
-                      border: '1px solid var(--border)',
-                      borderRadius: '0.5rem',
-                      color: 'var(--text-h)',
-                      background: 'var(--bg)',
-                      font: 'inherit',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {STATUS_OPTIONS.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
+                    value={item.status}
+                    onChange={(nextStatus) => handleStatusChange(item, nextStatus)}
+                    label="Alterar status:"
+                  />
                 </div>
               </div>
             </li>

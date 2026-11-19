@@ -2,7 +2,8 @@ import './catalog.css'
 
 export default function GameCard({ game }) {
   return (
-    <article className="catalog-game-card">
+    <a className="catalog-game-card catalog-game-card--link" href={`#/jogos/${game.id}`}>
+      <article className="catalog-game-card">
       {game.thumbnail ? (
         <img
           className="catalog-game-card__image"
@@ -26,6 +27,7 @@ export default function GameCard({ game }) {
           </p>
         )}
       </div>
-    </article>
+      </article>
+    </a>
   )
 }

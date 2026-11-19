@@ -4,7 +4,9 @@ import { mapRawgGameToCatalogGame } from '../api/catalogMapper'
 import EmptyState from '../components/EmptyState'
 import ErrorState from '../components/ErrorState'
 import LoadingState from '../components/LoadingState'
+import StatusSelector from '../components/StatusSelector'
 import { UI_MESSAGES, getErrorMessage } from '../components/uiMessages'
+import { addPersonalItem, hasPersonalItem } from '../api/personalListStorage'
 import '../components/catalog.css'
 
 const DETAIL_FIELDS = [
@@ -57,6 +59,9 @@ async function requestGameDetails(gameId, signal) {
 export default function DetalheJogoPage({ gameId }) {
   const id = normalizeGameId(gameId ?? resolveGameIdFromLocation())
   const [retryCount, setRetryCount] = useState(0)
+  const [selectedStatus, setSelectedStatus] = useState('quero-jogar')
+  const [personalFeedback, setPersonalFeedback] = useState(null)
+  const [isAdded, setIsAdded] = useState(false)
   const requestKey = `${id ?? ''}:${retryCount}`
 
   const [request, setRequest] = useState(() => ({
@@ -78,6 +83,8 @@ export default function DetalheJogoPage({ gameId }) {
 
         if (!controller.signal.aborted) {
           setRequest({ key, status: 'success', game: mappedGame, error: null })
+          setIsAdded(hasPersonalItem(mappedGame.id))
+          setPersonalFeedback(null)
         }
       } catch (requestError) {
         if (!controller.signal.aborted && requestError?.name !== 'AbortError') {
@@ -110,10 +117,30 @@ export default function DetalheJogoPage({ gameId }) {
     : []
   const screenshots = game?.screenshots ?? []
 
+  function handleAddToList() {
+    if (!game) return
+
+    try {
+      addPersonalItem({
+        gameId: game.id,
+        title: game.title,
+        thumbnail: game.thumbnail,
+        status: selectedStatus,
+      })
+      setIsAdded(true)
+      setPersonalFeedback({ type: 'success', message: UI_MESSAGES.success.addedToList })
+    } catch (error) {
+      setPersonalFeedback({
+        type: 'error',
+        message: getErrorMessage(error?.code ?? 'generic'),
+      })
+    }
+  }
+
   return (
     <main className="catalog-page catalog-detail">
       <header className="catalog-page__header">
-        <a className="catalog-detail__back" href="./">
+        <a className="catalog-detail__back" href="#/">
           ← Voltar para a descoberta
         </a>
         <h1>{game?.title ?? 'Detalhes do jogo'}</h1>
@@ -189,6 +216,33 @@ export default function DetalheJogoPage({ gameId }) {
               </ul>
             </section>
           )}
+
+          <section className="catalog-detail__section" aria-labelledby="catalog-detail-list-title">
+            <h2 id="catalog-detail-list-title">Minha lista pessoal</h2>
+            {personalFeedback?.type === 'success' && (
+              <p role="status" aria-live="polite">{personalFeedback.message}</p>
+            )}
+            {personalFeedback?.type === 'error' && (
+              <ErrorState message={personalFeedback.message} />
+            )}
+            {isAdded ? (
+              <p role="status" aria-live="polite">
+                Este jogo já está na sua lista pessoal.
+              </p>
+            ) : (
+              <div className="catalog-detail__add">
+                <StatusSelector
+                  id={`detail-status-${game.id}`}
+                  value={selectedStatus}
+                  onChange={setSelectedStatus}
+                  label="Status inicial:"
+                />
+                <button type="button" className="catalog-search__submit" onClick={handleAddToList}>
+                  Adicionar à lista
+                </button>
+              </div>
+            )}
+          </section>
         </article>
       )}
 

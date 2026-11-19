@@ -1,14 +1,20 @@
 import { STATUS_OPTIONS, isValidCanonicalStatus } from './statusOptions'
 import './catalog.css'
 
-export default function StatusSelector({ value = 'quero-jogar', onChange, disabled = false }) {
+export default function StatusSelector({
+  value = 'quero-jogar',
+  onChange,
+  disabled = false,
+  id = 'game-status-select',
+  label = 'Status na lista pessoal:',
+}) {
   return (
-    <div className="status-selector" style={{ display: 'flex', flexDirection: 'column', gap: '0.35s' }}>
-      <label htmlFor="game-status-select" style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-h)' }}>
-        Status na lista pessoal:
+    <div className="status-selector" style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+      <label htmlFor={id} style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-h)' }}>
+        {label}
       </label>
       <select
-        id="game-status-select"
+        id={id}
         value={isValidCanonicalStatus(value) ? value : 'quero-jogar'}
         onChange={(e) => {
           if (typeof onChange === 'function') {

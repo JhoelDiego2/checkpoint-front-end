@@ -32,18 +32,18 @@ A lista pessoal será persistida em `localStorage` (sem login), portanto ficará
 - Sem recursos sociais
 - Sem avaliações
 - Sem recomendações avançadas
-- Evitar exposição de segredos no front-end
+- Não versionar credenciais reais; a chave RAWG do MVP será exposta no cliente
 - Incluir paginação na listagem de jogos
 - Tratar explicitamente estados de carregamento, erro, sem resultados e duplicidade
 - Diferenciar erro recuperável (rede/servidor/timeout com retry) de erro `401` por chave inválida (mensagem de configuração)
 - Manter mapeamento explícito de status: rótulos UI (`quero jogar`, `jogando`, `jogado`) e valores canônicos (`quero-jogar`, `jogando`, `jogado`)
 
-**Risco de integração externa (RAWG + front-end direto)**:
+**Decisão de integração externa (RAWG + front-end direto)**:
 - A RAWG exige `key` na query string.
 - Em Vite, qualquer variável `VITE_*` é embutida no bundle e enviada ao navegador (não é segredo).
-- Portanto, integração direta expõe a chave ao cliente; adequada apenas se o grupo aceitar esse risco para MVP acadêmico.
-- Não versionar credenciais reais no repositório.
-- Alternativa para ocultar chave: backend/proxy próprio (fora do escopo atual; decisão do grupo).
+- O grupo escolheu a integração direta para este MVP e aceita o risco de exposição e uso da quota.
+- Configurar `VITE_RAWG_API_KEY` em `.env` local; não versionar credenciais reais.
+- Backend/proxy para ocultar a chave não faz parte do escopo escolhido.
 
 **Scale/Scope**: MVP acadêmico enxuto com 3 fluxos principais: descobrir (com paginação), adicionar, gerenciar status
 

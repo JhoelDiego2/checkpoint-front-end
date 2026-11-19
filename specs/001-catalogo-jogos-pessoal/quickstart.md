@@ -7,6 +7,7 @@ Este guia valida o comportamento fim a fim do MVP após implementação.
 - Projeto React + Vite configurado
 - Conectividade com a API externa definida em `contracts/catalog-api-contract.md`
 - Navegador com `localStorage` habilitado
+- Chave RAWG definida localmente em `.env` como `VITE_RAWG_API_KEY` (não versionar a chave real; ela ficará visível no navegador)
 
 ## Cenário 1 — Descobrir jogos
 

@@ -24,7 +24,15 @@ npm install
 npm run dev
 ```
 
-**Atenção:** a integração com a RAWG ainda depende da decisão do grupo sobre como fornecer a chave da API. Não coloque uma chave real no repositório. Atualize estas instruções quando essa configuração for definida na implementação.
+### Configurar a chave da RAWG
+
+A equipe escolheu a integração direta no navegador para este MVP. Crie um arquivo `.env` na raiz do projeto com:
+
+```env
+VITE_RAWG_API_KEY=sua_chave_rawg
+```
+
+O Vite disponibiliza variáveis com prefixo `VITE_` no navegador; portanto, essa chave não é secreta e pode ser vista por quem acessar a aplicação. O `.env` é ignorado pelo Git: não compartilhe nem versione uma chave real. O arquivo `.env.example` contém apenas o nome da variável.
 
 ## Onde estão os artefatos
 Os artefatos da funcionalidade estão em `specs/001-catalogo-jogos-pessoal/`:

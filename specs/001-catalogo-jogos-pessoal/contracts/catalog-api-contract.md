@@ -28,9 +28,10 @@
 - Portanto, chave usada diretamente no cliente pode ser exposta.
 - **Não** armazenar credenciais reais no repositório.
 
-### Alternativas para decisão do grupo
-- **Integração direta no cliente (MVP acadêmico)**: simples, mas expõe chave.
-- **Proxy/backend intermediário**: protege chave, porém aumenta escopo técnico.
+### Decisão do grupo
+- Usar integração direta no navegador neste MVP, com `VITE_RAWG_API_KEY` definida em `.env`.
+- O grupo aceita que a chave poderá ser vista e usada por terceiros; essa variável não é um segredo.
+- Proxy/backend não faz parte do escopo escolhido.
 
 ## CORS
 

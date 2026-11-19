@@ -24,17 +24,15 @@
 
 ## Decision 3: Segurança da chave no front-end
 
-- **Decision**: registrar limitação de integração direta no navegador.
+- **Decision**: usar integração direta com a RAWG no navegador para o MVP (Opção A), configurando a chave localmente em `.env` como `VITE_RAWG_API_KEY`.
 - **Rationale (confirmado)**:
   - RAWG exige API key (`key`) nas requisições.
   - Em Vite, variáveis `VITE_*` são expostas no bundle/browser e **não são secretas**.
-  - Logo, chave no front-end pode ser copiada e abusada por terceiros.
+  - O grupo aceita o risco de exposição e possível uso da quota da chave no contexto do MVP acadêmico.
 - **Política de projeto**:
-  - Não recomendar commit de credenciais reais no repositório.
-  - Usar `.env.local` para desenvolvimento local.
-- **Alternativas para decisão do grupo (sem ampliar escopo automaticamente)**:
-  - **A)** integração direta no cliente para MVP acadêmico, aceitando risco de exposição e quota.
-  - **B)** backend/proxy para proteger a chave (mais seguro, mas adiciona escopo arquitetural).
+  - Usar `.env` local e não versionar credenciais reais.
+  - A variável `VITE_RAWG_API_KEY` não deve ser tratada como segredo; ela pode ser extraída do cliente.
+  - Backend/proxy não faz parte do escopo escolhido para este MVP.
 
 ## Confirmado em documentação/testes
 

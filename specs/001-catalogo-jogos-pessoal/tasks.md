@@ -93,9 +93,9 @@
 
 **Independent Test**: Abrir “Minha Lista”, alterar status, recarregar página e confirmar persistência no mesmo navegador.
 
-- [ ] T027 [US3] Implementar página da lista pessoal com leitura de `localStorage` em `src/pages/MinhaListaPage.jsx` — Responsável: Kheyla Thais Quispe Puacara
-- [ ] T028 [US3] Implementar estado de lista vazia em `src/pages/MinhaListaPage.jsx` — Responsável: Kheyla Thais Quispe Puacara
-- [ ] T029 [US3] Implementar alteração de status na lista usando valores canônicos permitidos (`quero-jogar`, `jogando`, `jogado`) e exibindo rótulos legíveis na interface em `src/pages/MinhaListaPage.jsx` — Responsável: Kheyla Thais Quispe Puacara
+- [x] T027 [US3] Implementar página da lista pessoal com leitura de `localStorage` em `src/pages/MinhaListaPage.jsx` — Responsável: Kheyla Thais Quispe Puacara
+- [x] T028 [US3] Implementar estado de lista vazia em `src/pages/MinhaListaPage.jsx` — Responsável: Kheyla Thais Quispe Puacara
+- [x] T029 [US3] Implementar alteração de status na lista usando valores canônicos permitidos (`quero-jogar`, `jogando`, `jogado`) e exibindo rótulos legíveis na interface em `src/pages/MinhaListaPage.jsx` — Responsável: Kheyla Thais Quispe Puacara
 - [ ] T030 [US3] Integrar `StatusSelector` e `GameStatusBadge` na lista em `src/pages/MinhaListaPage.jsx` — Responsáveis: Kheyla Thais Quispe Puacara e Renan Daher Franceschelli
 - [ ] T031 [US3] Garantir atualização de `updatedAt (string datetime ISO, obrigatório)` ao trocar status em `src/api/personalListStorage.js` — Responsável: Lukas Farias de Oliveira
 - [ ] T032 [US3] Exibir mensagem informativa sobre persistência local, ausência de sincronização entre dispositivos e risco de perda ao limpar dados em `src/pages/MinhaListaPage.jsx` — Responsável: Kheyla Thais Quispe Puacara

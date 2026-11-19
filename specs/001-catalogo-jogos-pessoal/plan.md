@@ -57,7 +57,7 @@ A lista pessoal será persistida em `localStorage` (sem login), portanto ficará
 - **Acessibilidade e Comunicação Clara**: PASS
 - **Colaboração e Revisão em Grupo**: PASS
 
-### Post-Design Re-check
+### Post-Design Re-check 
 
 - `research.md`, `data-model.md`, `contracts/` e `quickstart.md` mantêm escopo MVP e não introduzem itens proibidos.
 - Persistência local e limitações (mesmo navegador/dispositivo; perda ao limpar dados) estão explicitadas.

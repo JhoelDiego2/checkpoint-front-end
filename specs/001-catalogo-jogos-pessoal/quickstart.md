@@ -1,5 +1,19 @@
 # Quickstart de Validação — Catálogo pessoal de jogos
 
+## Evidência automatizada final — 19/11/2026
+
+- `npm run build`: concluído com sucesso.
+- `npm run lint`: concluído sem erros.
+- Servidor Vite iniciado em `http://127.0.0.1:5173/`.
+- Navegação principal validada entre descoberta e “Minha Lista”.
+- Estado vazio da lista validado no navegador.
+- Persistência e alteração de status validadas com `localStorage`:
+  - status inicial: `quero-jogar`;
+  - status alterado: `jogado`;
+  - `updatedAt` atualizado no item persistido;
+  - mensagem de sucesso exibida.
+- Atribuição RAWG foi confirmada no código das páginas de catálogo e detalhe como hyperlink ativo para `https://rawg.io`, com `target="_blank"` e `rel="noopener noreferrer"`.
+
 Este guia valida o comportamento fim a fim do MVP após implementação.
 
 ## Pré-requisitos

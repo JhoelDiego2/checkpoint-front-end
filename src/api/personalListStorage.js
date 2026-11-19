@@ -177,36 +177,34 @@ export function createPersonalListStorage({
     const currentStorage = getStorage()
     if (!currentStorage) return []
 
-    let raw = null
     try {
-      raw = currentStorage.getItem(storageKey)
-    } catch {
-      return []
-    }
+      const raw = currentStorage.getItem(storageKey)
+      if (!raw) return []
 
-    if (!raw) return []
-
-    let parsed
-    try {
-      parsed = JSON.parse(raw)
-    } catch {
-      return []
-    }
-
-    if (!Array.isArray(parsed)) return []
-
-    const seenGameIds = new Set()
-
-    return parsed.reduce((items, candidate) => {
-      const item = parseStoredItem(candidate)
-
-      if (item && !seenGameIds.has(item.gameId)) {
-        seenGameIds.add(item.gameId)
-        items.push(item)
+      let parsed
+      try {
+        parsed = JSON.parse(raw)
+      } catch {
+        return []
       }
 
-      return items
-    }, [])
+      if (!Array.isArray(parsed)) return []
+
+      const seenGameIds = new Set()
+
+      return parsed.reduce((items, candidate) => {
+        const item = parseStoredItem(candidate)
+
+        if (item && !seenGameIds.has(item.gameId)) {
+          seenGameIds.add(item.gameId)
+          items.push(item)
+        }
+
+        return items
+      }, [])
+    } catch {
+      return []
+    }
   }
 
   function writeItems(items) {

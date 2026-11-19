@@ -1,6 +1,38 @@
 import { isValidCanonicalStatus } from '../components/statusOptions'
+import { UI_MESSAGES } from '../components/uiMessages'
 
 export const PERSONAL_LIST_STORAGE_KEY = 'checkpoint:personal-list'
+
+/**
+ * Erro da camada de armazenamento da lista pessoal.
+ * `code` permite que a UI reutilize getErrorMessage() de uiMessages.js.
+ */
+export class PersonalListStorageError extends Error {
+  constructor(message, { code, details } = {}) {
+    super(message)
+    this.name = 'PersonalListStorageError'
+    this.code = code
+    this.details = details
+  }
+}
+
+function createStorageError(code, details) {
+  const messages = {
+    duplicate: UI_MESSAGES.error.duplicateItem,
+    'invalid-status': UI_MESSAGES.error.invalidStatus,
+    'not-found': '[personalListStorage] Jogo não encontrado na lista pessoal.',
+    'storage-unavailable': '[personalListStorage] Falha ao acessar o armazenamento local do navegador.',
+  }
+
+  return new PersonalListStorageError(messages[code], { code, details })
+}
+
+function createInvalidFieldError(field) {
+  return new PersonalListStorageError(
+    `[personalListStorage] Campo obrigatório inválido: ${field}`,
+    { code: 'invalid-item', details: { field } }
+  )
+}
 
 function isValidNumber(value) {
   return typeof value === 'number' && Number.isFinite(value)
@@ -84,21 +116,21 @@ function parseStoredItem(value) {
  */
 function buildNewItem(input, now) {
   if (!input || typeof input !== 'object' || Array.isArray(input)) {
-    throw new Error('[personalListStorage] Campo obrigatório inválido: gameId')
+    throw createInvalidFieldError('gameId')
   }
 
   const gameId = input.gameId
   if (!isValidNumber(gameId)) {
-    throw new Error('[personalListStorage] Campo obrigatório inválido: gameId')
+    throw createInvalidFieldError('gameId')
   }
 
   const title = toOptionalString(input.title)
   if (!title) {
-    throw new Error('[personalListStorage] Campo obrigatório inválido: title')
+    throw createInvalidFieldError('title')
   }
 
   if (!isValidCanonicalStatus(input.status)) {
-    throw new Error('[personalListStorage] Status inválido')
+    throw createStorageError('invalid-status')
   }
 
   const timestamp = getNowIso(now)
@@ -107,14 +139,14 @@ function buildNewItem(input, now) {
     ? timestamp
     : toIsoDateTime(input.savedAt)
   if (!savedAt) {
-    throw new Error('[personalListStorage] Campo obrigatório inválido: savedAt')
+    throw createInvalidFieldError('savedAt')
   }
 
   const updatedAt = input.updatedAt === undefined || input.updatedAt === null
     ? timestamp
     : toIsoDateTime(input.updatedAt)
   if (!updatedAt) {
-    throw new Error('[personalListStorage] Campo obrigatório inválido: updatedAt')
+    throw createInvalidFieldError('updatedAt')
   }
 
   return withThumbnail(
@@ -180,13 +212,13 @@ export function createPersonalListStorage({
   function writeItems(items) {
     const currentStorage = getStorage()
     if (!currentStorage) {
-      throw new Error('[personalListStorage] Falha ao acessar o armazenamento local do navegador.')
+      throw createStorageError('storage-unavailable')
     }
 
     try {
       currentStorage.setItem(storageKey, JSON.stringify(items))
     } catch (error) {
-      throw new Error('[personalListStorage] Falha ao acessar o armazenamento local do navegador.')
+      throw createStorageError('storage-unavailable', error)
     }
   }
 
@@ -208,7 +240,7 @@ export function createPersonalListStorage({
     const items = readItems()
 
     if (items.some((entry) => entry.gameId === item.gameId)) {
-      throw new Error('Este jogo já está na sua lista pessoal e não pode ser adicionado novamente.')
+      throw createStorageError('duplicate')
     }
 
     writeItems([...items, item])
@@ -224,14 +256,14 @@ export function createPersonalListStorage({
 
     // Valida o enum antes de qualquer leitura/escrita para preservar o estado anterior.
     if (!isValidCanonicalStatus(status)) {
-      throw new Error('[personalListStorage] Status inválido')
+      throw createStorageError('invalid-status')
     }
 
     const items = readItems()
     const index = items.findIndex((entry) => entry.gameId === gameId)
 
     if (index === -1) {
-      throw new Error('[personalListStorage] Jogo não encontrado na lista pessoal.')
+      throw createStorageError('not-found')
     }
 
     const updatedItem = {
